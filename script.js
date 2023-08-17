@@ -10,9 +10,8 @@ const gravidadeElement = document.querySelector("#gravidade");
 
 const infoPlaneta = document.querySelector(".info-planeta")
 
-
-
 // Funções
+
 const getPlanetData = async(planeta) => {
 
     const apiPlanetURL = `https://api.le-systeme-solaire.net/rest/bodies/${planeta}`;
@@ -23,12 +22,11 @@ const getPlanetData = async(planeta) => {
      return data 
 }
 
+
 const showPlanetData = async(planeta) => {
 
 
     const data = await getPlanetData(planeta);
-
-    
 
 
     nameElement.innerText = data.englishName;
