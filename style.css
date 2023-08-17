@@ -10,6 +10,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
+    width: 100vw;
 }
 
 /*-----HEADER------*/
@@ -33,21 +34,21 @@ header {
     font-size: 2rem;
 }
 
-/*-------MAIN-------*/
+/*------------MAIN------------*/
 
 main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 500px;
+    height: 400px;
 }
 
 .img-planeta img {
     height: 200px;
 }
 
-.planeta-content {
+.planetaContent {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -87,5 +88,34 @@ section {
 #search:hover {
     transform: scale(1.05);
     background-color: #000;
+    color: #fff;
+}
+
+.hide {
+    display: none;
+}
+
+/*--------FOOTER-------*/
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    margin-top: 100px;
+}
+
+.developer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.social-media {
+    display: flex;
+    gap: 10px;
+    color: #fff;
+}
+
+.social-media i {
     color: #fff;
 }

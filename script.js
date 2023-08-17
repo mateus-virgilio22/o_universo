@@ -8,6 +8,8 @@ const translacaoElement = document.querySelector("#translacao");
 const rotacaoElement = document.querySelector("#rotacao");
 const gravidadeElement = document.querySelector("#gravidade");
 
+const infoPlaneta = document.querySelector(".info-planeta")
+
 
 
 // Funções
@@ -31,9 +33,11 @@ const showPlanetData = async(planeta) => {
 
     nameElement.innerText = data.englishName;
     ePlanetaElement.innerText = data.bodyType;
-    translacaoElement.innerText = data.sideralOrbit;
-    rotacaoElement.innerText = data.sideralRotation;
+    translacaoElement.innerText = Math.round(data.sideralOrbit)+' days';
+    rotacaoElement.innerText = Math.round(data.sideralRotation) + ' hours';
     gravidadeElement.innerText = data.gravity;
+
+    infoPlaneta.classList.remove("hide");
     
 }
 
@@ -44,4 +48,12 @@ searchBtn.addEventListener("click", (e) => {
     const planeta = planetaInput.value;
 
     showPlanetData(planeta);
+});
+
+planetaInput.addEventListener("keyup", (e) => {
+    if (e.code === "Enter") {
+      const planeta = e.target.value;
+  
+      showPlanetData(planeta);
+    }
 });
