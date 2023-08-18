@@ -68,9 +68,9 @@ const opcoes = [
 
 // Funções
 
-const getValue = (valorDigitado) => {
+const getValue = (valorVerificado) => {
 
-    const opcao = opcoes.find( opcao => opcao.textoDigitado === valorDigitado); 
+    const opcao = opcoes.find( opcao => opcao.textoDigitado === valorVerificado); 
 
     showPlanetData(opcao.valor);
 
@@ -109,14 +109,18 @@ searchBtn.addEventListener("click", (e) => {
 
     const valorDigitado = planetaInput.value.toLowerCase();
 
-    getValue(valorDigitado);
+    const valorVerificado = valorDigitado.trim();
+
+    getValue(valorVerificado);
 });
 
 planetaInput.addEventListener("keyup", (e) => {
     if (e.code === "Enter") {
 
       const valorDigitado = e.target.value.toLowerCase();
+
+      const valorVerificado = valorDigitado.trim();
   
-      getValue(valorDigitado);
+      getValue(valorVerificado);
     }
 });
