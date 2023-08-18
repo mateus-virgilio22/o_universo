@@ -10,11 +10,33 @@ const gravidadeElement = document.querySelector("#gravidade");
 
 const infoPlaneta = document.querySelector(".info-planeta")
 
+const opcoes = [
+    {textoDigitado:'terra', valor:'Earth'},
+    {textoDigitado:'sol', valor:'Sun'},
+    {textoDigitado:'lua', valor:'Moon'},
+    {textoDigitado:'mercurio', valor:'Mercury'},
+    {textoDigitado:'venus', valor:'Venus'},
+    {textoDigitado:'marte', valor:'Mars'},
+    {textoDigitado:'jupiter', valor:'Jupiter'},
+    {textoDigitado:'saturno', valor:'Saturn'},
+    {textoDigitado:'urano', valor:'Uranus'},
+    {textoDigitado:'netuno', valor:'Neptune'},
+    {textoDigitado:'plutão', valor:'Pluto'},
+];
+
 // Funções
 
-const getPlanetData = async(planeta) => {
+const getValue = (valorDigitado) => {
 
-    const apiPlanetURL = `https://api.le-systeme-solaire.net/rest/bodies/${planeta}`;
+    const opcao = opcoes.find( opcao => opcao.textoDigitado === valorDigitado); 
+
+    showPlanetData(opcao.valor);
+
+}
+
+const getPlanetData = async(opcao) => {
+
+    const apiPlanetURL = `https://api.le-systeme-solaire.net/rest/bodies/${opcao}`;
 
      const res = await fetch(apiPlanetURL);
      const data = await res.json();
@@ -23,17 +45,17 @@ const getPlanetData = async(planeta) => {
 }
 
 
-const showPlanetData = async(planeta) => {
+const showPlanetData = async(opcao) => {
 
 
-    const data = await getPlanetData(planeta);
+    const data = await getPlanetData(opcao);
 
 
     nameElement.innerText = data.englishName;
     ePlanetaElement.innerText = data.bodyType;
-    translacaoElement.innerText = Math.round(data.sideralOrbit)+' days';
-    rotacaoElement.innerText = Math.round(data.sideralRotation) + ' hours';
-    gravidadeElement.innerText = data.gravity;
+    translacaoElement.innerText = Math.round(data.sideralOrbit)+' dias';
+    rotacaoElement.innerText = Math.round(data.sideralRotation) + ' horas';
+    gravidadeElement.innerText = data.gravity + ' m/s²';
 
     infoPlaneta.classList.remove("hide");
     
@@ -43,15 +65,16 @@ const showPlanetData = async(planeta) => {
 searchBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
-    const planeta = planetaInput.value;
+    const valorDigitado = planetaInput.value.toLowerCase();
 
-    showPlanetData(planeta);
+    getValue(valorDigitado);
 });
 
 planetaInput.addEventListener("keyup", (e) => {
     if (e.code === "Enter") {
-      const planeta = e.target.value;
+
+      const valorDigitado = e.target.value.toLowerCase();
   
-      showPlanetData(planeta);
+      getValue(valorDigitado);
     }
 });
