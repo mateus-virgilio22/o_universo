@@ -13,6 +13,8 @@ const infoPlaneta = document.querySelector(".info-planeta")
 
 const img_planeta = document.getElementById("img_planeta");
 
+const errorElement = document.querySelector("#error-message");
+
 const opcoes = [
     {textoDigitado:'terra', valor:'Earth'},
     {textoDigitado:'sol', valor:'Sun'},
@@ -74,7 +76,15 @@ const getValue = (valorVerificado) => {
 
     const opcao = opcoes.find( opcao => opcao.textoDigitado === valorVerificado);
 
-    showPlanetData(opcao.valor);
+    if(opcao) {
+        showPlanetData(opcao.valor);
+        errorElement.classList.add("hide");
+        img_planeta.classList.remove("hide");
+    } else {
+        infoPlaneta.classList.add("hide");
+        errorElement.classList.remove("hide");
+        img_planeta.classList.add("hide");
+    }
 
 }
 
@@ -94,17 +104,21 @@ const showPlanetData = async(opcao) => {
 
     const data = await getPlanetData(opcao);
 
-    nameElement.innerText = data.englishName;
-    ePlanetaElement.innerText = data.bodyType;
-    translacaoElement.innerText = Math.round(data.sideralOrbit)+' dias';
-    rotacaoElement.innerText = Math.round(data.sideralRotation) + ' horas';
-    gravidadeElement.innerText = data.gravity + ' m/s²';
+    
+        nameElement.innerText = data.englishName;
+        ePlanetaElement.innerText = data.bodyType;
+        translacaoElement.innerText = Math.round(data.sideralOrbit)+' dias';
+        rotacaoElement.innerText = Math.round(data.sideralRotation) + ' horas';
+        gravidadeElement.innerText = data.gravity + ' m/s²';
 
-    const imagePath = `./assets/planetas/${opcao}.png`;
+        const imagePath = `./assets/planetas/${opcao}.png`;
 
-    img_planeta.src = imagePath;
+        img_planeta.src = imagePath;
 
-    infoPlaneta.classList.remove("hide");
+        infoPlaneta.classList.remove("hide");
+     
+
+    
     
 }
 
