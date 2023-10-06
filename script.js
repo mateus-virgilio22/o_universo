@@ -11,6 +11,8 @@ const gravidadeElement = document.querySelector("#gravidade");
 
 const infoPlaneta = document.querySelector(".info-planeta")
 
+const img_planeta = document.getElementById("img_planeta");
+
 const opcoes = [
     {textoDigitado:'terra', valor:'Earth'},
     {textoDigitado:'sol', valor:'Sun'},
@@ -70,7 +72,7 @@ const opcoes = [
 
 const getValue = (valorVerificado) => {
 
-    const opcao = opcoes.find( opcao => opcao.textoDigitado === valorVerificado); 
+    const opcao = opcoes.find( opcao => opcao.textoDigitado === valorVerificado);
 
     showPlanetData(opcao.valor);
 
@@ -92,12 +94,15 @@ const showPlanetData = async(opcao) => {
 
     const data = await getPlanetData(opcao);
 
-
     nameElement.innerText = data.englishName;
     ePlanetaElement.innerText = data.bodyType;
     translacaoElement.innerText = Math.round(data.sideralOrbit)+' dias';
     rotacaoElement.innerText = Math.round(data.sideralRotation) + ' horas';
     gravidadeElement.innerText = data.gravity + ' m/s²';
+
+    const imagePath = `./assets/planetas/${opcao}.png`;
+
+    img_planeta.src = imagePath;
 
     infoPlaneta.classList.remove("hide");
     
